@@ -1,0 +1,45 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Aula03
+
+# Controls when the action will run. 
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  job1:
+    # The type of runner that the job will run on
+    name: Meu Primeiro Job
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Passo 1
+        run: env | sort
+      #- uses: actions/checkout@v2
+  job2:
+    name: Meu Segundo Job
+    runs-on: windows-latest
+    steps:
+      - name: Passo 1
+        run: "Get-ChildItem Env: | Sort-Object Name"
+    
+  job3:
+    name: Meu terceiro job
+    runs-on: ubunto-latest
+    needs: [job1,job2]
+    
+    steps:
+      - name: Ultimo passo
+        run: echo Passo final
+        
